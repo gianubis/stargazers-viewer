@@ -26,6 +26,21 @@
 		D223EB4E285F066E00829A3C /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = D223EB47285F066E00829A3C /* splash.png */; };
 		D223EB4F285F066E00829A3C /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = D223EB47285F066E00829A3C /* splash.png */; };
 		D223EB50285F066E00829A3C /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = D223EB47285F066E00829A3C /* splash.png */; };
+		D223EB57285F0BEB00829A3C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB55285F0BEB00829A3C /* Reachability.m */; };
+		D223EB58285F0BEB00829A3C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB55285F0BEB00829A3C /* Reachability.m */; };
+		D223EB59285F0BEB00829A3C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB55285F0BEB00829A3C /* Reachability.m */; };
+		D223EB5C285F0E8600829A3C /* StargazersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB5B285F0E8600829A3C /* StargazersViewController.m */; };
+		D223EB5D285F0E8600829A3C /* StargazersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB5B285F0E8600829A3C /* StargazersViewController.m */; };
+		D223EB5E285F0E8600829A3C /* StargazersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB5B285F0E8600829A3C /* StargazersViewController.m */; };
+		D223EB61285F0EC500829A3C /* StargazerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB60285F0EC500829A3C /* StargazerCell.m */; };
+		D223EB62285F0EC500829A3C /* StargazerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB60285F0EC500829A3C /* StargazerCell.m */; };
+		D223EB63285F0EC500829A3C /* StargazerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB60285F0EC500829A3C /* StargazerCell.m */; };
+		D223EB67285F0ED300829A3C /* StargazerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB65285F0ED300829A3C /* StargazerModel.m */; };
+		D223EB68285F0ED300829A3C /* StargazerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB65285F0ED300829A3C /* StargazerModel.m */; };
+		D223EB69285F0ED300829A3C /* StargazerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB65285F0ED300829A3C /* StargazerModel.m */; };
+		D223EB6D285F0EE400829A3C /* RestService.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB6B285F0EE400829A3C /* RestService.m */; };
+		D223EB6E285F0EE400829A3C /* RestService.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB6B285F0EE400829A3C /* RestService.m */; };
+		D223EB6F285F0EE400829A3C /* RestService.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB6B285F0EE400829A3C /* RestService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +81,16 @@
 		D223EB45285F066E00829A3C /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		D223EB46285F066E00829A3C /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header.png; sourceTree = "<group>"; };
 		D223EB47285F066E00829A3C /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
+		D223EB55285F0BEB00829A3C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		D223EB56285F0BEB00829A3C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		D223EB5A285F0E8600829A3C /* StargazersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StargazersViewController.h; sourceTree = "<group>"; };
+		D223EB5B285F0E8600829A3C /* StargazersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StargazersViewController.m; sourceTree = "<group>"; };
+		D223EB5F285F0EC500829A3C /* StargazerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StargazerCell.h; sourceTree = "<group>"; };
+		D223EB60285F0EC500829A3C /* StargazerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StargazerCell.m; sourceTree = "<group>"; };
+		D223EB65285F0ED300829A3C /* StargazerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StargazerModel.m; sourceTree = "<group>"; };
+		D223EB66285F0ED300829A3C /* StargazerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StargazerModel.h; sourceTree = "<group>"; };
+		D223EB6B285F0EE400829A3C /* RestService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestService.m; sourceTree = "<group>"; };
+		D223EB6C285F0EE400829A3C /* RestService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestService.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +143,9 @@
 			children = (
 				D223EB52285F068F00829A3C /* AppDelegate */,
 				D223EB44285F062800829A3C /* Images */,
+				D223EB64285F0ED300829A3C /* Model */,
+				D223EB54285F0BEB00829A3C /* Reachability */,
+				D223EB6A285F0EE400829A3C /* Services */,
 				D223EB53285F06A000829A3C /* ViewControllers */,
 				D223EB1B285F03D600829A3C /* Assets.xcassets */,
 				D223EB20285F03D600829A3C /* Info.plist */,
@@ -177,10 +205,41 @@
 			isa = PBXGroup;
 			children = (
 				D223EB18285F03D100829A3C /* Main.storyboard */,
+				D223EB5A285F0E8600829A3C /* StargazersViewController.h */,
+				D223EB5B285F0E8600829A3C /* StargazersViewController.m */,
+				D223EB5F285F0EC500829A3C /* StargazerCell.h */,
+				D223EB60285F0EC500829A3C /* StargazerCell.m */,
 				D223EB15285F03D100829A3C /* ViewController.h */,
 				D223EB16285F03D100829A3C /* ViewController.m */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D223EB54285F0BEB00829A3C /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				D223EB55285F0BEB00829A3C /* Reachability.m */,
+				D223EB56285F0BEB00829A3C /* Reachability.h */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		D223EB64285F0ED300829A3C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D223EB65285F0ED300829A3C /* StargazerModel.m */,
+				D223EB66285F0ED300829A3C /* StargazerModel.h */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D223EB6A285F0EE400829A3C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D223EB6C285F0EE400829A3C /* RestService.h */,
+				D223EB6B285F0EE400829A3C /* RestService.m */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,9 +382,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D223EB17285F03D100829A3C /* ViewController.m in Sources */,
+				D223EB61285F0EC500829A3C /* StargazerCell.m in Sources */,
+				D223EB6D285F0EE400829A3C /* RestService.m in Sources */,
 				D223EB11285F03D100829A3C /* AppDelegate.m in Sources */,
+				D223EB5C285F0E8600829A3C /* StargazersViewController.m in Sources */,
 				D223EB22285F03D600829A3C /* main.m in Sources */,
 				D223EB14285F03D100829A3C /* SceneDelegate.m in Sources */,
+				D223EB57285F0BEB00829A3C /* Reachability.m in Sources */,
+				D223EB67285F0ED300829A3C /* StargazerModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,7 +397,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D223EB58285F0BEB00829A3C /* Reachability.m in Sources */,
+				D223EB68285F0ED300829A3C /* StargazerModel.m in Sources */,
+				D223EB62285F0EC500829A3C /* StargazerCell.m in Sources */,
 				D223EB2C285F03D600829A3C /* StargazersTests.m in Sources */,
+				D223EB5D285F0E8600829A3C /* StargazersViewController.m in Sources */,
+				D223EB6E285F0EE400829A3C /* RestService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,7 +410,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D223EB63285F0EC500829A3C /* StargazerCell.m in Sources */,
+				D223EB69285F0ED300829A3C /* StargazerModel.m in Sources */,
 				D223EB38285F03D600829A3C /* StargazersUITestsLaunchTests.m in Sources */,
+				D223EB59285F0BEB00829A3C /* Reachability.m in Sources */,
+				D223EB5E285F0E8600829A3C /* StargazersViewController.m in Sources */,
+				D223EB6F285F0EE400829A3C /* RestService.m in Sources */,
 				D223EB36285F03D600829A3C /* StargazersUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

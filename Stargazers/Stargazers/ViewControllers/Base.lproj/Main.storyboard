@@ -63,7 +63,7 @@
                                             <fontDescription key="titleFontDescription" type="system" pointSize="10"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="btnShowTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="x1p-yn-THV"/>
+                                            <action selector="btnShowTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yqh-by-8Zr"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -88,6 +88,9 @@
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="6sb-9o-QLY"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REPOSITORY NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y20-MX-g3o" userLabel="lblRepository">
                                         <rect key="frame" x="8" y="72.333333333333314" width="372" height="14.333333333333329"/>
@@ -101,6 +104,9 @@
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="6YC-cb-ItY"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -144,6 +150,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnShow" destination="Yz7-BZ-7T7" id="oGT-sy-S4W"/>
+                        <outlet property="lblOwner" destination="RQ7-ru-NYU" id="Amv-VM-QHw"/>
+                        <outlet property="lblRepository" destination="Y20-MX-g3o" id="Jux-gG-3bm"/>
+                        <outlet property="txtOwner" destination="myH-qZ-kkr" id="uzh-z6-5TY"/>
+                        <outlet property="txtRepository" destination="2XH-fF-ieP" id="aPz-4a-CUf"/>
                         <segue destination="xnV-7W-eyC" kind="show" identifier="showStargazers" id="NDR-hf-QHz"/>
                     </connections>
                 </viewController>
@@ -201,6 +212,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="xnV-7W-eyC" id="yx9-Tm-zCO"/>
+                                    <outlet property="delegate" destination="xnV-7W-eyC" id="Ciz-rs-bH3"/>
+                                </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kOx-GU-0a5">
                                 <rect key="frame" x="20" y="0.0" width="388" height="80"/>
@@ -278,6 +293,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xj6-ma-h17"/>
+                    <connections>
+                        <outlet property="lblOwnerName" destination="xDz-Y0-1d0" id="plJ-Se-lA4"/>
+                        <outlet property="lblOwnerTitle" destination="FJa-Zq-f2s" id="JxM-qM-0Ap"/>
+                        <outlet property="lblRepoName" destination="U8x-jM-y57" id="g6Z-6j-YlP"/>
+                        <outlet property="lblRepoTitle" destination="ln8-0f-xvV" id="q3S-qq-XdV"/>
+                        <outlet property="tblView" destination="HzU-52-x8E" id="Cbx-KB-9mG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qYc-K9-O97" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
