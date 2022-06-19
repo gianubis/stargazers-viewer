@@ -8,6 +8,7 @@
 #import "StargazersViewController.h"
 #import "StargazerCell.h"
 #import "RestService.h"
+#import "ImageCache.h"
 
 @interface StargazersViewController () <RestServiceDelegate>
 
@@ -74,6 +75,30 @@
     // get nickname of stargazer
     NSDictionary *dict = self.stargazerModel.stargazers[indexPath.row];
     cell.lblName.text = [dict objectForKey:@"login"];
+
+    //get a dispatch queue lo fetch image
+    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    //this will start the image loading in bg
+    dispatch_async(concurrentQueue, ^{
+
+        NSString *urlImage = [dict objectForKey:@"avatar_url"];
+        UIImage *image = [[ImageCache sharedInstance] getCachedImageForKey:urlImage];
+        if(image) {
+            NSLog(@"This is cached");
+        } else {
+            NSURL *imageURL = [NSURL URLWithString:urlImage];
+            image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:imageURL]];
+            if(image) {
+                NSLog(@"Caching ....");
+                [[ImageCache sharedInstance] cacheImage:image forKey:urlImage];
+            }
+        }
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            cell.imvAvatar.image = image;
+        });
+
+    });
     
     return cell;
 }
