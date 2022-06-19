@@ -88,6 +88,9 @@
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="ndJ-pi-b0D"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REPOSITORY NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y20-MX-g3o" userLabel="lblRepository">
                                         <rect key="frame" x="8" y="72.333333333333314" width="372" height="14.333333333333329"/>
@@ -101,6 +104,9 @@
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="XXZ-uK-KWc"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -144,6 +150,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="txtOwner" destination="myH-qZ-kkr" id="CoC-YA-EDR"/>
+                        <outlet property="txtRepository" destination="2XH-fF-ieP" id="mVt-Fr-FJc"/>
                         <segue destination="xnV-7W-eyC" kind="show" identifier="showStargazers" id="NDR-hf-QHz"/>
                     </connections>
                 </viewController>

@@ -26,6 +26,9 @@
 		D223EB4E285F066E00829A3C /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = D223EB47285F066E00829A3C /* splash.png */; };
 		D223EB4F285F066E00829A3C /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = D223EB47285F066E00829A3C /* splash.png */; };
 		D223EB50285F066E00829A3C /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = D223EB47285F066E00829A3C /* splash.png */; };
+		D223EB57285F0BEB00829A3C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB55285F0BEB00829A3C /* Reachability.m */; };
+		D223EB58285F0BEB00829A3C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB55285F0BEB00829A3C /* Reachability.m */; };
+		D223EB59285F0BEB00829A3C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB55285F0BEB00829A3C /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,8 @@
 		D223EB45285F066E00829A3C /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		D223EB46285F066E00829A3C /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header.png; sourceTree = "<group>"; };
 		D223EB47285F066E00829A3C /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
+		D223EB55285F0BEB00829A3C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		D223EB56285F0BEB00829A3C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +123,7 @@
 			children = (
 				D223EB52285F068F00829A3C /* AppDelegate */,
 				D223EB44285F062800829A3C /* Images */,
+				D223EB54285F0BEB00829A3C /* Reachability */,
 				D223EB53285F06A000829A3C /* ViewControllers */,
 				D223EB1B285F03D600829A3C /* Assets.xcassets */,
 				D223EB20285F03D600829A3C /* Info.plist */,
@@ -181,6 +187,15 @@
 				D223EB16285F03D100829A3C /* ViewController.m */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D223EB54285F0BEB00829A3C /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				D223EB55285F0BEB00829A3C /* Reachability.m */,
+				D223EB56285F0BEB00829A3C /* Reachability.h */,
+			);
+			path = Reachability;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,6 +341,7 @@
 				D223EB11285F03D100829A3C /* AppDelegate.m in Sources */,
 				D223EB22285F03D600829A3C /* main.m in Sources */,
 				D223EB14285F03D100829A3C /* SceneDelegate.m in Sources */,
+				D223EB57285F0BEB00829A3C /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D223EB58285F0BEB00829A3C /* Reachability.m in Sources */,
 				D223EB2C285F03D600829A3C /* StargazersTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D223EB38285F03D600829A3C /* StargazersUITestsLaunchTests.m in Sources */,
+				D223EB59285F0BEB00829A3C /* Reachability.m in Sources */,
 				D223EB36285F03D600829A3C /* StargazersUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
