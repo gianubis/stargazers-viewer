@@ -9,23 +9,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class StargazerModel;
-
-@protocol RestServiceDelegate <NSObject>
-
-- (void) fetchDataCompleteWithData:(NSDictionary*)data;
-- (void) fetchDataCompleteWithError:(NSString*)error;
-
-@end
-
 @interface RestService : NSObject
 
-@property (nonatomic, assign) id<RestServiceDelegate> delegate;
 @property (nonatomic, assign) long lastPage;
 
-
 + (RestService *)sharedInstance;
-- (void)fetchdataWithPage:(NSInteger)page withOwner:(NSString*)owner withRepository:(NSString*)repository;
+- (void)fetchdataWithPage:(NSInteger)page withOwner:(nonnull NSString *)owner withRepository:(nonnull NSString *)repository andCompletionHandler:(void (^)(NSDictionary * _Nullable dictionary, NSString * _Nullable errorMessage))comp;
 
 @end
 

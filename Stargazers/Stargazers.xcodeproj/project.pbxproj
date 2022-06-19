@@ -14,7 +14,6 @@
 		D223EB1C285F03D600829A3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D223EB1B285F03D600829A3C /* Assets.xcassets */; };
 		D223EB1F285F03D600829A3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D223EB1D285F03D600829A3C /* LaunchScreen.storyboard */; };
 		D223EB22285F03D600829A3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB21285F03D600829A3C /* main.m */; };
-		D223EB2C285F03D600829A3C /* StargazersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB2B285F03D600829A3C /* StargazersTests.m */; };
 		D223EB36285F03D600829A3C /* StargazersUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB35285F03D600829A3C /* StargazersUITests.m */; };
 		D223EB38285F03D600829A3C /* StargazersUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB37285F03D600829A3C /* StargazersUITestsLaunchTests.m */; };
 		D223EB48285F066E00829A3C /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = D223EB45285F066E00829A3C /* button.png */; };
@@ -44,6 +43,11 @@
 		D223EB72285F19D300829A3C /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB70285F19D300829A3C /* ImageCache.m */; };
 		D223EB76285F1A3D00829A3C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D223EB75285F1A3D00829A3C /* QuartzCore.framework */; };
 		D223EB78285F1A4200829A3C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D223EB77285F1A4200829A3C /* SystemConfiguration.framework */; };
+		D223EB79285F269F00829A3C /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB70285F19D300829A3C /* ImageCache.m */; };
+		D223EB7A285F269F00829A3C /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB70285F19D300829A3C /* ImageCache.m */; };
+		D223EB7B285F26A700829A3C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB16285F03D100829A3C /* ViewController.m */; };
+		D223EB7C285F26A700829A3C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB16285F03D100829A3C /* ViewController.m */; };
+		D223EB7F285F4EAD00829A3C /* StargazersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB2B285F03D600829A3C /* StargazersTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,7 +163,6 @@
 				D223EB53285F06A000829A3C /* ViewControllers */,
 				D223EB1B285F03D600829A3C /* Assets.xcassets */,
 				D223EB20285F03D600829A3C /* Info.plist */,
-				D223EB73285F1A2700829A3C /* Frameworks */,
 				D223EB51285F067A00829A3C /* Supporting Files */,
 			);
 			path = Stargazers;
@@ -253,13 +256,6 @@
 				D223EB6B285F0EE400829A3C /* RestService.m */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		D223EB73285F1A2700829A3C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		D223EB74285F1A3D00829A3C /* Frameworks */ = {
@@ -429,10 +425,12 @@
 			files = (
 				D223EB58285F0BEB00829A3C /* Reachability.m in Sources */,
 				D223EB68285F0ED300829A3C /* StargazerModel.m in Sources */,
+				D223EB7C285F26A700829A3C /* ViewController.m in Sources */,
 				D223EB62285F0EC500829A3C /* StargazerCell.m in Sources */,
-				D223EB2C285F03D600829A3C /* StargazersTests.m in Sources */,
 				D223EB5D285F0E8600829A3C /* StargazersViewController.m in Sources */,
+				D223EB7F285F4EAD00829A3C /* StargazersTests.m in Sources */,
 				D223EB6E285F0EE400829A3C /* RestService.m in Sources */,
+				D223EB79285F269F00829A3C /* ImageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,12 +438,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D223EB7B285F26A700829A3C /* ViewController.m in Sources */,
 				D223EB63285F0EC500829A3C /* StargazerCell.m in Sources */,
 				D223EB69285F0ED300829A3C /* StargazerModel.m in Sources */,
 				D223EB38285F03D600829A3C /* StargazersUITestsLaunchTests.m in Sources */,
 				D223EB59285F0BEB00829A3C /* Reachability.m in Sources */,
 				D223EB5E285F0E8600829A3C /* StargazersViewController.m in Sources */,
 				D223EB6F285F0EE400829A3C /* RestService.m in Sources */,
+				D223EB7A285F269F00829A3C /* ImageCache.m in Sources */,
 				D223EB36285F03D600829A3C /* StargazersUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

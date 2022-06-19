@@ -14,7 +14,7 @@
 
 #define SEGUE_IDENTIFIER @"showStargazers"
 
-@interface ViewController () <RestServiceDelegate>
+@interface ViewController ()
 
 @property (nonatomic, strong) StargazerModel *stargazerModel;
 
@@ -55,10 +55,9 @@
             [self.stargazerModel.stargazers removeAllObjects];
             [RestService sharedInstance].lastPage = 0;
             
-            // call service first time to load data
-            self.stargazerModel.nextPage = 1;
-            [RestService sharedInstance].delegate = self;
-            [[RestService sharedInstance] fetchdataWithPage:self.stargazerModel.nextPage withOwner:self.txtOwner.text withRepository:self.txtRepository.text];
+            // call service
+            [self callRestService];
+            
         } else {
             
             // show message if textfields are not set
@@ -90,50 +89,63 @@
 }
 
 #pragma mark - Private Methods
+- (void) callRestService {
+    
+    // call service first time to load data
+    self.stargazerModel.nextPage = 1;
+    
+    __block ViewController *blocksafeSelf = self;
+    [[RestService sharedInstance] fetchdataWithPage:self.stargazerModel.nextPage withOwner:self.txtOwner.text withRepository:self.txtRepository.text andCompletionHandler:^(NSDictionary * _Nullable dictionary, NSString * _Nullable errorMessage) {
+        
+        if (dictionary) {
+            NSArray *newData = [dictionary objectForKey:@"Data"];
+            if (newData.count > 0) {
+                
+                // update model
+                blocksafeSelf.stargazerModel.lastPage = [[dictionary objectForKey:@"LastPage"] integerValue];
+                [blocksafeSelf.stargazerModel.stargazers addObjectsFromArray:[dictionary objectForKey:@"Data"]];
+
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // navigate to tableview
+                    [blocksafeSelf performSegueWithIdentifier:SEGUE_IDENTIFIER sender:self];
+                });
+                
+            } else {
+
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // show message to inform user that the repository has no stargazers
+                    NSString *message = [NSString stringWithFormat:@"This repository has no stargazers"];
+                    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Warning" message:message preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
+                    [alert addAction:defaultAction];
+                    [blocksafeSelf presentViewController:alert animated:YES completion:nil];
+                });
+            }
+            
+        } else {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // show message with error
+                NSString *message = @"";
+                if ([errorMessage isEqualToString:@"404"]) {
+                    message = @"Owner or repository not found.";
+                } else {
+                    message = [NSString stringWithFormat:@"No data retrieved with error: %@", errorMessage];
+                }
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error" message:message preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
+                [alert addAction:defaultAction];
+                [blocksafeSelf presentViewController:alert animated:YES completion:nil];
+            });
+        }
+    }];
+}
+
 - (BOOL)connected {
     
     Reachability *reachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [reachability currentReachabilityStatus];
     return networkStatus != NotReachable;
-}
-
-#pragma mark - RestServiceDelegate
-- (void)fetchDataCompleteWithData:(nonnull NSDictionary *)data {
-        
-    NSArray *newData = [data objectForKey:@"Data"];
-    if (newData.count > 0) {
-        
-        // update model
-        self.stargazerModel.lastPage = [[data objectForKey:@"LastPage"] integerValue];
-        [self.stargazerModel.stargazers addObjectsFromArray:[data objectForKey:@"Data"]];
-
-        // navigate to tableview
-        [self performSegueWithIdentifier:SEGUE_IDENTIFIER sender:self];
-        
-    } else {
-
-        // show message to inform user that the repository has no stargazers
-        NSString *message = [NSString stringWithFormat:@"This repository has no stargazers"];
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Warning" message:message preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
-        [alert addAction:defaultAction];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
-}
-
-- (void)fetchDataCompleteWithError:(NSString *)error {
-
-    // show message with error
-    NSString *message = @"";
-    if ([error isEqualToString:@"404"]) {
-        message = @"Owner or repository not found.";
-    } else {
-        message = [NSString stringWithFormat:@"No data retrieved with error: %@", error];
-    }
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error" message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
-    [alert addAction:defaultAction];
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - Navigation

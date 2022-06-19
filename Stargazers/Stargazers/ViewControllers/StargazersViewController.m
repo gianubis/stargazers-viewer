@@ -10,7 +10,7 @@
 #import "RestService.h"
 #import "ImageCache.h"
 
-@interface StargazersViewController () <RestServiceDelegate>
+@interface StargazersViewController ()
 
 @property (nonatomic, weak) IBOutlet UITableView *tblView;
 @property (nonatomic, weak) IBOutlet UILabel *lblOwnerTitle;
@@ -34,26 +34,6 @@
     [self.tblView setShowsHorizontalScrollIndicator:NO];
     [self.tblView setShowsVerticalScrollIndicator:NO];
         
-    [RestService sharedInstance].delegate = self;
-}
-
-#pragma mark - RestService Delegate
-- (void)fetchDataCompleteWithData:(NSDictionary *)data {
-
-    // update model
-    self.stargazerModel.lastPage = [[data objectForKey:@"LastPage"] integerValue];
-    [self.stargazerModel.stargazers addObjectsFromArray:[data objectForKey:@"Data"]];
-
-    [self.tblView reloadData];
-}
-
-- (void)fetchDataCompleteWithError:(NSString *)error {
-    
-    NSString *message = [NSString stringWithFormat:@"No data retrieved with error: %@", error];
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error" message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
-    [alert addAction:defaultAction];
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - UITableViewDelegate and DataSource
@@ -106,9 +86,8 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if ((indexPath.row == self.stargazerModel.stargazers.count - 3) && self.stargazerModel.nextPage < self.stargazerModel.lastPage) {
         self.stargazerModel.nextPage++;
-        
-        // call service with next page to load more data
-        [[RestService sharedInstance] fetchdataWithPage:self.stargazerModel.nextPage withOwner:self.strOwner withRepository:self.strRepository];
+
+        [self callService];
     }
 }
 
@@ -123,6 +102,36 @@
     if ([[UIApplication sharedApplication] canOpenURL:url]) {
         [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
     }
+}
+
+- (void)callService {
+    // call service with next page to load more data
+    __block StargazersViewController *blocksafeSelf = self;
+    [[RestService sharedInstance] fetchdataWithPage:self.stargazerModel.nextPage withOwner:self.strOwner withRepository:self.strRepository andCompletionHandler:^(NSDictionary * _Nullable dictionary, NSString * _Nullable errorMessage) {
+        
+        if (dictionary) {
+            // update model
+            blocksafeSelf.stargazerModel.lastPage = [[dictionary objectForKey:@"LastPage"] integerValue];
+            [blocksafeSelf.stargazerModel.stargazers addObjectsFromArray:[dictionary objectForKey:@"Data"]];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // reload data
+                [blocksafeSelf.tblView reloadData];
+            });
+
+        } else {
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // show message
+                NSString *message = [NSString stringWithFormat:@"No data retrieved with error: %@", errorMessage];
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error" message:message preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
+                [alert addAction:defaultAction];
+                [blocksafeSelf presentViewController:alert animated:YES completion:nil];
+            });
+        }
+    }];
+
 }
 
 @end
