@@ -29,7 +29,7 @@ static RestService *_sharedInstance = nil;
     return nil;
 }
 
-- (void)fetchdataWithPage:(NSInteger)page withOwner:(nonnull NSString *)owner withRepository:(nonnull NSString *)repository {
+- (void)fetchdataWithPage:(NSInteger)page withOwner:(nonnull NSString *)owner withRepository:(nonnull NSString *)repository andCompletionHandler:(void (^)(NSDictionary * _Nullable dictionary, NSString * _Nullable errorMessage))comp {
     
     NSURLSessionConfiguration *defaultSessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultSessionConfiguration];
@@ -56,21 +56,18 @@ static RestService *_sharedInstance = nil;
                 NSDictionary *results = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                 NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:results, @"Data", strLastPage, @"LastPage", nil];
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [blocksafeSelf.delegate fetchDataCompleteWithData:userInfo];
-                });
+                comp(userInfo, nil);
                 
             } else {
                 NSLog(@"No data retrieved with error: %@",error.localizedDescription);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.delegate fetchDataCompleteWithError:error.localizedDescription];
-                });
+
+                comp(nil, error.localizedDescription);
             }
         } else {
             NSLog(@"Error with statusCode %ld",httpResp.statusCode);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.delegate fetchDataCompleteWithError:[NSString stringWithFormat:@"%ld",httpResp.statusCode]];
-            });
+
+            NSString *statusCode = [NSString stringWithFormat:@"%ld", httpResp.statusCode];
+            comp(nil, statusCode);
         }
     }];
 
