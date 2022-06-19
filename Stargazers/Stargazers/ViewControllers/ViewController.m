@@ -160,14 +160,4 @@
     }
 }
 
-#pragma mark - Unit Test data
-
-- (void)testConnection {
-    if ([self connected]) {
-        self.testIsConnected = true;
-    } else {
-        self.testIsConnected = false;
-    }
-}
-
 @end

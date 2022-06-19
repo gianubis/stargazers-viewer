@@ -10,7 +10,6 @@
 @interface ViewController : UIViewController
 
 // used by unit test
-@property (nonatomic, assign) BOOL testIsConnected;
-- (void)testConnection;
+- (BOOL)connected;
 
 @end
