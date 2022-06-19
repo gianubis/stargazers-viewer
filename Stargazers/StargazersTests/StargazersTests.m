@@ -25,9 +25,7 @@
 }
 
 - (void)testConnectionTask {
-    [_vcToTest testConnection];
-    bool result = _vcToTest.testIsConnected;
-    XCTAssertTrue(result);
+    XCTAssertTrue([_vcToTest connected]);
 }
 
 - (void)testFetchDataCompletedTask {
