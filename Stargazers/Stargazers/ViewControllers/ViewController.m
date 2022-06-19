@@ -6,12 +6,17 @@
 //
 
 #import "ViewController.h"
+#import "StargazersViewController.h"
+#import "StargazerModel.h"
 #import "Reachability.h"
+#import "RestService.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 
 #define SEGUE_IDENTIFIER @"showStargazers"
 
-@interface ViewController ()
+@interface ViewController () <RestServiceDelegate>
+
+@property (nonatomic, strong) StargazerModel *stargazerModel;
 
 @property (nonatomic, weak) IBOutlet UILabel *lblOwner;
 @property (nonatomic, weak) IBOutlet UITextField *txtOwner;
@@ -25,13 +30,18 @@
 
 @implementation ViewController
 
+#pragma mark - View lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-
+    
+    // init model
+    if (!self.stargazerModel) {
+        self.stargazerModel = [[StargazerModel alloc] init];
+        self.stargazerModel.stargazers = [[NSMutableArray alloc] initWithCapacity:0];
+    }
+    
     self.txtOwner.placeholder = @"repository owner";
     self.txtRepository.placeholder = @"repository name";
-
 }
 
 #pragma mark - Actions
@@ -41,9 +51,14 @@
     if ([self connected]) {
         if ((self.txtOwner.text.length > 0) && (self.txtOwner.text.length > 0)) {
             
-            // navigate to tableview
-            [self performSegueWithIdentifier:SEGUE_IDENTIFIER sender:self];
-
+            // reset model
+            [self.stargazerModel.stargazers removeAllObjects];
+            [RestService sharedInstance].lastPage = 0;
+            
+            // call service first time to load data
+            self.stargazerModel.nextPage = 1;
+            [RestService sharedInstance].delegate = self;
+            [[RestService sharedInstance] fetchdataWithPage:self.stargazerModel.nextPage withOwner:self.txtOwner.text withRepository:self.txtRepository.text];
         } else {
             
             // show message if textfields are not set
@@ -82,10 +97,55 @@
     return networkStatus != NotReachable;
 }
 
+#pragma mark - RestServiceDelegate
+- (void)fetchDataCompleteWithData:(nonnull NSDictionary *)data {
+        
+    NSArray *newData = [data objectForKey:@"Data"];
+    if (newData.count > 0) {
+        
+        // update model
+        self.stargazerModel.lastPage = [[data objectForKey:@"LastPage"] integerValue];
+        [self.stargazerModel.stargazers addObjectsFromArray:[data objectForKey:@"Data"]];
+
+        // navigate to tableview
+        [self performSegueWithIdentifier:SEGUE_IDENTIFIER sender:self];
+        
+    } else {
+
+        // show message to inform user that the repository has no stargazers
+        NSString *message = [NSString stringWithFormat:@"This repository has no stargazers"];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Warning" message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
+
+- (void)fetchDataCompleteWithError:(NSString *)error {
+
+    // show message with error
+    NSString *message = @"";
+    if ([error isEqualToString:@"404"]) {
+        message = @"Owner or repository not found.";
+    } else {
+        message = [NSString stringWithFormat:@"No data retrieved with error: %@", error];
+    }
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error" message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
+    if ([[segue identifier] isEqualToString:SEGUE_IDENTIFIER])
+    {
+        StargazersViewController *vc = (StargazersViewController*)segue.destinationViewController;
+        vc.strOwner = self.txtOwner.text;
+        vc.strRepository = self.txtRepository.text;
+        vc.stargazerModel = self.stargazerModel;
+    }
 }
 
 #pragma mark - Unit Test data
