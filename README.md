@@ -1,0 +1,2 @@
+# stargazers-viewer
+TEST APPLICATION TO CONSUME GITHUB API
