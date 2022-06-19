@@ -19,6 +19,10 @@
     return YES;
 }
 
+-(UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
 
 #pragma mark - UISceneSession lifecycle
 
