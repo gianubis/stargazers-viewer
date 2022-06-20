@@ -9,6 +9,7 @@
 #import "StargazerCell.h"
 #import "RestService.h"
 #import "ImageCache.h"
+#import "Utils.h"
 
 @interface StargazersViewController ()
 
@@ -124,14 +125,10 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 // show message
                 NSString *message = [NSString stringWithFormat:@"No data retrieved with error: %@", errorMessage];
-                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error" message:message preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
-                [alert addAction:defaultAction];
-                [blocksafeSelf presentViewController:alert animated:YES completion:nil];
+                [Utils showAlertWithTitle:@"Error" andMessage:message andViewController:blocksafeSelf];
             });
         }
     }];
-
 }
 
 @end
