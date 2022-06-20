@@ -48,6 +48,9 @@
 		D223EB7B285F26A700829A3C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB16285F03D100829A3C /* ViewController.m */; };
 		D223EB7C285F26A700829A3C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB16285F03D100829A3C /* ViewController.m */; };
 		D223EB7F285F4EAD00829A3C /* StargazersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB2B285F03D600829A3C /* StargazersTests.m */; };
+		D223EB8D2860DA9C00829A3C /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB8C2860DA9C00829A3C /* Utils.m */; };
+		D223EB8E2860DA9C00829A3C /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB8C2860DA9C00829A3C /* Utils.m */; };
+		D223EB8F2860DA9C00829A3C /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D223EB8C2860DA9C00829A3C /* Utils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +105,8 @@
 		D223EB71285F19D300829A3C /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
 		D223EB75285F1A3D00829A3C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D223EB77285F1A4200829A3C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D223EB8B2860DA9C00829A3C /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		D223EB8C2860DA9C00829A3C /* Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +166,7 @@
 				D223EB54285F0BEB00829A3C /* Reachability */,
 				D223EB6A285F0EE400829A3C /* Services */,
 				D223EB53285F06A000829A3C /* ViewControllers */,
+				D223EB8A2860DA8600829A3C /* Utils */,
 				D223EB1B285F03D600829A3C /* Assets.xcassets */,
 				D223EB20285F03D600829A3C /* Info.plist */,
 				D223EB51285F067A00829A3C /* Supporting Files */,
@@ -265,6 +271,15 @@
 				D223EB75285F1A3D00829A3C /* QuartzCore.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D223EB8A2860DA8600829A3C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D223EB8B2860DA9C00829A3C /* Utils.h */,
+				D223EB8C2860DA9C00829A3C /* Utils.m */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -407,6 +422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D223EB17285F03D100829A3C /* ViewController.m in Sources */,
+				D223EB8D2860DA9C00829A3C /* Utils.m in Sources */,
 				D223EB61285F0EC500829A3C /* StargazerCell.m in Sources */,
 				D223EB72285F19D300829A3C /* ImageCache.m in Sources */,
 				D223EB6D285F0EE400829A3C /* RestService.m in Sources */,
@@ -423,6 +439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D223EB8E2860DA9C00829A3C /* Utils.m in Sources */,
 				D223EB58285F0BEB00829A3C /* Reachability.m in Sources */,
 				D223EB68285F0ED300829A3C /* StargazerModel.m in Sources */,
 				D223EB7C285F26A700829A3C /* ViewController.m in Sources */,
@@ -441,6 +458,7 @@
 				D223EB7B285F26A700829A3C /* ViewController.m in Sources */,
 				D223EB63285F0EC500829A3C /* StargazerCell.m in Sources */,
 				D223EB69285F0ED300829A3C /* StargazerModel.m in Sources */,
+				D223EB8F2860DA9C00829A3C /* Utils.m in Sources */,
 				D223EB38285F03D600829A3C /* StargazersUITestsLaunchTests.m in Sources */,
 				D223EB59285F0BEB00829A3C /* Reachability.m in Sources */,
 				D223EB5E285F0E8600829A3C /* StargazersViewController.m in Sources */,

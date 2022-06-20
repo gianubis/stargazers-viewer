@@ -10,6 +10,8 @@
 #import "StargazerModel.h"
 #import "Reachability.h"
 #import "RestService.h"
+#import "Utils.h"
+
 #import <SystemConfiguration/SystemConfiguration.h>
 
 #define SEGUE_IDENTIFIER @"showStargazers"
@@ -59,20 +61,12 @@
             [self callRestService];
             
         } else {
-            
             // show message if textfields are not set
-            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Warning" message:@"Repository Owner and Repository Name must be set" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
-            [alert addAction:defaultAction];
-            [self presentViewController:alert animated:YES completion:nil];
+            [Utils showAlertWithTitle:@"Warning" andMessage:@"Repository Owner and Repository Name must be set" andViewController:self];
         }
     } else {
-        
         // show message if connection is not present
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Warning" message:@"Internet connection is not present" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
-        [alert addAction:defaultAction];
-        [self presentViewController:alert animated:YES completion:nil];
+        [Utils showAlertWithTitle:@"Warning" andMessage:@"Internet connection is not present" andViewController:self];
     }
 }
 
