@@ -49,7 +49,7 @@
 
     // check internet connection
     if ([self connected]) {
-        if ((self.txtOwner.text.length > 0) && (self.txtOwner.text.length > 0)) {
+        if ((self.txtOwner.text.length > 0) && (self.txtRepository.text.length > 0)) {
             
             // reset model
             [self.stargazerModel.stargazers removeAllObjects];
