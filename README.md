@@ -1,2 +1,6 @@
 # stargazers-viewer
-TEST APPLICATION TO CONSUME GITHUB API
+This application allows you to view the strargazers of a github repository. By entering the owner name and the repository name, the list of stargazers will be shown.
+# Language and Tool
+Xcode 13.2.1
+
+Objective-c
