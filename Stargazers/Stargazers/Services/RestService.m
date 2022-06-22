@@ -18,17 +18,6 @@
 
 @implementation RestService
 
-static RestService *_sharedInstance = nil;
-
-+ (RestService *)sharedInstance {
-    @synchronized([RestService class]) {
-        if (!_sharedInstance)
-          _sharedInstance = [[self alloc] init];
-        return _sharedInstance;
-    }
-    return nil;
-}
-
 - (void)fetchdataWithPage:(NSInteger)page withOwner:(nonnull NSString *)owner withRepository:(nonnull NSString *)repository andCompletionHandler:(void (^)(NSDictionary * _Nullable dictionary, NSString * _Nullable errorMessage))comp {
     
     NSURLSessionConfiguration *defaultSessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];

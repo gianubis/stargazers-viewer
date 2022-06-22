@@ -11,12 +11,13 @@
 #import "Reachability.h"
 #import "RestService.h"
 #import "Utils.h"
+#import "ServiceController.h"
 
 #import <SystemConfiguration/SystemConfiguration.h>
 
 #define SEGUE_IDENTIFIER @"showStargazers"
 
-@interface ViewController ()
+@interface ViewController () <ServiceControllerDelegate>
 
 @property (nonatomic, strong) StargazerModel *stargazerModel;
 
@@ -42,6 +43,8 @@
         self.stargazerModel.stargazers = [[NSMutableArray alloc] initWithCapacity:0];
     }
     
+    [ServiceController sharedInstance].delegate = self;
+
     self.txtOwner.placeholder = @"repository owner";
     self.txtRepository.placeholder = @"repository name";
 }
@@ -55,11 +58,10 @@
             
             // reset model
             [self.stargazerModel.stargazers removeAllObjects];
-            [RestService sharedInstance].lastPage = 0;
+            [self.stargazerModel setLastPage:0];
             
             // call service
-            [self callRestService];
-            
+            [[ServiceController sharedInstance] fetchdataWithPage:1 withOwner:self.txtOwner.text withRepository:self.txtRepository.text];
         } else {
             // show message if textfields are not set
             [Utils showAlertWithTitle:@"Warning" andMessage:@"Repository Owner and Repository Name must be set" andViewController:self];
@@ -69,6 +71,22 @@
         [Utils showAlertWithTitle:@"Warning" andMessage:@"Internet connection is not present" andViewController:self];
     }
 }
+
+- (void)updateModelWithSuccess:(StargazerModel *)model {
+    self.stargazerModel = model;
+    [self performSegueWithIdentifier:SEGUE_IDENTIFIER sender:self];
+}
+
+- (void)updateModelWithErrorMessage:(NSString *)errorMessage {
+    NSString *message = @"";
+    if ([errorMessage isEqualToString:@"404"]) {
+        message = @"Owner or repository not found.";
+    } else {
+        message = [NSString stringWithFormat:@"No data retrieved with error: %@", errorMessage];
+    }
+    [Utils showAlertWithTitle:@"Error" andMessage:message andViewController:self];
+}
+
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -83,52 +101,6 @@
 }
 
 #pragma mark - Private Methods
-- (void) callRestService {
-    
-    // call service first time to load data
-    self.stargazerModel.nextPage = 1;
-    
-    __block ViewController *blocksafeSelf = self;
-    [[RestService sharedInstance] fetchdataWithPage:self.stargazerModel.nextPage withOwner:self.txtOwner.text withRepository:self.txtRepository.text andCompletionHandler:^(NSDictionary * _Nullable dictionary, NSString * _Nullable errorMessage) {
-        
-        if (dictionary) {
-            NSArray *newData = [dictionary objectForKey:@"Data"];
-            if (newData.count > 0) {
-                
-                // update model
-                blocksafeSelf.stargazerModel.lastPage = [[dictionary objectForKey:@"LastPage"] integerValue];
-                [blocksafeSelf.stargazerModel.stargazers addObjectsFromArray:[dictionary objectForKey:@"Data"]];
-
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    // navigate to tableview
-                    [blocksafeSelf performSegueWithIdentifier:SEGUE_IDENTIFIER sender:self];
-                });
-                
-            } else {
-
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    // show message to inform user that the repository has no stargazers
-                    NSString *message = [NSString stringWithFormat:@"This repository has no stargazers"];
-                    [Utils showAlertWithTitle:@"Warning" andMessage:message andViewController:blocksafeSelf];
-                });
-            }
-            
-        } else {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                // show message with error
-                NSString *message = @"";
-                if ([errorMessage isEqualToString:@"404"]) {
-                    message = @"Owner or repository not found.";
-                } else {
-                    message = [NSString stringWithFormat:@"No data retrieved with error: %@", errorMessage];
-                }
-                [Utils showAlertWithTitle:@"Error" andMessage:message andViewController:blocksafeSelf];
-            });
-        }
-    }];
-}
-
 - (BOOL)connected {
     
     Reachability *reachability = [Reachability reachabilityForInternetConnection];

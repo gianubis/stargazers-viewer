@@ -7,11 +7,12 @@
 
 #import "StargazersViewController.h"
 #import "StargazerCell.h"
+#import "ServiceController.h"
 #import "RestService.h"
 #import "ImageCache.h"
 #import "Utils.h"
 
-@interface StargazersViewController ()
+@interface StargazersViewController () <ServiceControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tblView;
 @property (nonatomic, weak) IBOutlet UILabel *lblOwnerTitle;
@@ -24,8 +25,18 @@
 @implementation StargazersViewController
 
 #pragma mark - View Lifecycle
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.stargazerModel = [[StargazerModel alloc] init];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [ServiceController sharedInstance].delegate = self;
 
     // update owner and repo on tableview header
     self.lblOwnerName.text = self.strOwner;
@@ -35,6 +46,17 @@
     [self.tblView setShowsHorizontalScrollIndicator:NO];
     [self.tblView setShowsVerticalScrollIndicator:NO];
         
+}
+
+#pragma mark - ServiceControllerDelegate
+- (void)updateModelWithSuccess:(StargazerModel *)model {
+    self.stargazerModel = model;
+    [self.tblView reloadData];
+}
+
+- (void)updateModelWithErrorMessage:(NSString *)errorMessage {
+    NSString *message = [NSString stringWithFormat:@"No data retrieved with error: %@", errorMessage];
+    [Utils showAlertWithTitle:@"Error" andMessage:message andViewController:self];
 }
 
 #pragma mark - UITableViewDelegate and DataSource
@@ -88,7 +110,7 @@
     if ((indexPath.row == self.stargazerModel.stargazers.count - 3) && self.stargazerModel.nextPage < self.stargazerModel.lastPage) {
         self.stargazerModel.nextPage++;
 
-        [self callService];
+        [[ServiceController sharedInstance] fetchdataWithPage:self.stargazerModel.nextPage withOwner:self.strOwner withRepository:self.strRepository];
     }
 }
 
@@ -103,32 +125,6 @@
     if ([[UIApplication sharedApplication] canOpenURL:url]) {
         [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
     }
-}
-
-- (void)callService {
-    // call service with next page to load more data
-    __block StargazersViewController *blocksafeSelf = self;
-    [[RestService sharedInstance] fetchdataWithPage:self.stargazerModel.nextPage withOwner:self.strOwner withRepository:self.strRepository andCompletionHandler:^(NSDictionary * _Nullable dictionary, NSString * _Nullable errorMessage) {
-        
-        if (dictionary) {
-            // update model
-            blocksafeSelf.stargazerModel.lastPage = [[dictionary objectForKey:@"LastPage"] integerValue];
-            [blocksafeSelf.stargazerModel.stargazers addObjectsFromArray:[dictionary objectForKey:@"Data"]];
-
-            dispatch_async(dispatch_get_main_queue(), ^{
-                // reload data
-                [blocksafeSelf.tblView reloadData];
-            });
-
-        } else {
-
-            dispatch_async(dispatch_get_main_queue(), ^{
-                // show message
-                NSString *message = [NSString stringWithFormat:@"No data retrieved with error: %@", errorMessage];
-                [Utils showAlertWithTitle:@"Error" andMessage:message andViewController:blocksafeSelf];
-            });
-        }
-    }];
 }
 
 @end

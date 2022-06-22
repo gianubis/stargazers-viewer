@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) long lastPage;
 
-+ (RestService *)sharedInstance;
 - (void)fetchdataWithPage:(NSInteger)page withOwner:(nonnull NSString *)owner withRepository:(nonnull NSString *)repository andCompletionHandler:(void (^)(NSDictionary * _Nullable dictionary, NSString * _Nullable errorMessage))comp;
 
 @end
