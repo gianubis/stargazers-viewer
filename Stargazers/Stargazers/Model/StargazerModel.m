@@ -13,4 +13,12 @@
 @synthesize nextPage;
 @synthesize lastPage;
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.stargazers = [[NSMutableArray alloc] initWithCapacity:0];
+    }
+    return self;
+}
+
 @end

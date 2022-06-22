@@ -102,7 +102,7 @@
 
     [app.buttons[@"Return"] tap];
     [app.staticTexts[@"Show Stargazers"] tap];
-    [app.alerts[@"Warning"].scrollViews.otherElements.buttons[@"OK"] tap];
+    [app.alerts[@"Error"].scrollViews.otherElements.buttons[@"OK"] tap];
 }
 
 - (void)testCompleteBehavior {
